@@ -4,8 +4,8 @@
 <configuration>
 
 	<typeAliases>
+		<typeAlias alias="User" type="kr.co.cooks.vo.UserVO"/>
 		<typeAlias alias="review" type="kr.co.cooks.vo.ReviewVO"/>
-		<typeAlias alias="login" type="kr.co.cooks.vo.LoginVO"/>
 	</typeAliases>
 	
 </configuration>
