@@ -15,19 +15,15 @@
 		p:password="eowjseo" p:url="jdbc:oracle:thin:@team3.callon.kr:orcl"
 		destroy-method="close" />
 
-	<bean id ="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	 	<property name="dataSource" ref="dataSource" />
-	 	<property name="configLocation" value="classpath:MapperConfig.xml" />
-	 </bean>
-	 
-	 <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-	 	<constructor-arg ref="sqlSessionFactory" />
-	 </bean>
-	 
-	 <bean id="DaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="kr.co.cooks.dao.ReviewDao" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:kr/co/cooks/*Dao.xml" />
+		<property name="configLocation" value="classpath:MapperConfig.xml"></property>
+		<property name="typeAliasesPackage" value="kr.co.cooks.vo" />
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.cooks.dao" />
 	</bean>
 
 </beans>
