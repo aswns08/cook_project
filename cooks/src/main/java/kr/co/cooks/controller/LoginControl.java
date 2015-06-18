@@ -17,11 +17,11 @@ public class LoginControl {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginControl.class);
 	
-	@Autowired UserService loginService;
+	@Autowired UserService userService;
 	
 /*	페이지 이동만 필요할 경우 */
   
-	@RequestMapping(value = "/home.app")
+	@RequestMapping(value = "/loginForm.app")
 	public ModelAndView mainForm() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -40,13 +40,13 @@ public class LoginControl {
 
 		ModelAndView mav = new ModelAndView();
 
-		int status = loginService.validation_Check(email, password);
+		int status = userService.validation_Check(email, password);
 
 		if(status==1) {
 
 			//session.setAttribute("email", email);
 
-			mav.setViewName("home");
+			mav.setViewName("main/main");
 
 		} else if(status==2) {
 			System.out.println("패스워드가 틀렸습니다.");

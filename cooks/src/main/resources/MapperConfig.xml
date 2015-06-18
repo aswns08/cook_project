@@ -4,7 +4,7 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias alias="User" type="kr.co.cooks.vo.UserVO"/>
+		<typeAlias alias="user" type="kr.co.cooks.vo.UserVO"/>
 		<typeAlias alias="review" type="kr.co.cooks.vo.ReviewVO"/>
 	</typeAliases>
 	

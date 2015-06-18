@@ -2,12 +2,16 @@
 <%@ page session="false" %>
 <html>
 <head>
+
+
 	<title>Home</title>
 </head>
 <body>
 <h1>
 	Hello world! welcome ~~~~~
 </h1>
+
+<img src="images/galbi.jpg">
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>
