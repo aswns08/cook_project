@@ -1,3 +1,16 @@
+<style>
+.modal-header, .modal-sign-header, .close {
+	background-color: #5cb85c;
+	color: white !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-footer {
+	background-color: #f9f9f9;
+}
+</style>
+
     <!-- 로그인 / 회원가입 / 비밀번호 찾기 -->
     <!-- 회원가입 Modal -->
   <div class="modal fade" id="signUp" role="dialog">
@@ -13,27 +26,27 @@
           <form role="form">
             <div class="form-group">
               <label for="email"><span class="glyphicon glyphicon-envelope"></span> 이메일</label>
-              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+              <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
             </div>
             
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
-              <input type="text" class="form-control" id="psw" placeholder="Enter password">
+              <input type="text" class="form-control" id="password" placeholder="Enter password" name="password">
             </div>
             
             <div class="form-group">
             	<label for="name"><span class="glyphicon glyphicon-user"></span> 이름</label>
-		    	<input type="text" class="form-control" placeholder="Enter user name" id="name">		      
+		    	<input type="text" class="form-control" id="uname" placeholder="Enter user name" name="uname">		      
             </div>
             
             <div class="form-group">
             	<label for="address"><span class="glyphicon glyphicon-home"></span> 주소</label>
-		     	<input type="text" class="form-control" placeholder="Enter address" id="address">
+		     	<input type="text" class="form-control" id="uaddress" placeholder="Enter address" name="uaddress">
             </div>
             
             <div class="form-group">
             	<label for="phone"><span class="glyphicon glyphicon-phone"></span> 연락처</label>
-		      <input type="text" class="form-control" placeholder="Enter phone number" id="phone">
+		      <input type="text" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
             </div>
             <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>회원가입</button>
           </form>          
@@ -57,12 +70,12 @@
           <form role="form" action="/cooks/login.app" method="post">
             <div class="form-group">
               <label for="email"><span class="glyphicon glyphicon-envelope"></span> 이메일</label>
-              <input type="text" class="form-control" id="email" placeholder="Enter email">
+              <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
             </div>
             
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
-              <input type="text" class="form-control" id="password" placeholder="Enter password">
+              <input type="text" class="form-control" id="password" placeholder="Enter password" name="password">
             </div>
             
             <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>로그인</button>
@@ -91,7 +104,7 @@
           <form role="form">
             <div class="form-group">
               <label for="email"><span class="glyphicon glyphicon-envelope"></span> 계정 이메일을 입력하세요</label>
-              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+              <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
             </div>  
              <button type="button" onclick="close_findPassword();" class="btn btn-success btn-block" data-toggle="modal" data-target="#changePassword"><span class="glyphicon glyphicon-grain"></span> 인증번호 받기</button>
           </form>
@@ -118,17 +131,17 @@
           <form role="form">
             <div class="form-group">
               <label for="email"><span class="glyphicon glyphicon-envelope"></span> 인증번호</label>
-              <input type="text" class="form-control" id="pinNumber" placeholder="Enter pin number">
+              <input type="text" class="form-control" id="pinNumber" placeholder="Enter pin number" name="pinNumber">
             </div>       
             
               <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 새 비밀번호</label>
-              <input type="text" class="form-control" id="psw" placeholder="Enter password">
+              <input type="text" class="form-control" id="new_pwd" placeholder="Enter password" name="new_pwd">
             </div>
             
               <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 새 비밀번호 확인</label>
-              <input type="text" class="form-control" id="psw" placeholder="Enter password again">
+              <input type="text" class="form-control" id="check_pwd" placeholder="Enter password again" name="check_pwd">
             </div>
                
             <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-grain"></span> 비밀번호 변경하기</button>

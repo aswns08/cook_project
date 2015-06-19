@@ -1,8 +1,11 @@
 package kr.co.cooks.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import kr.co.cooks.service.UserService;
+import kr.co.cooks.vo.UserVO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,48 +21,43 @@ public class LoginControl {
 	private static final Logger logger = LoggerFactory.getLogger(LoginControl.class);
 	
 	@Autowired UserService userService;
+	UserVO userVO;
 	
 /*	페이지 이동만 필요할 경우 */
   
-	@RequestMapping(value = "/loginForm.app")
+	@RequestMapping(value = "/cooksMain.app")
 	public ModelAndView mainForm() {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("login");
+		mav.setViewName("main/main");
 		
 		return mav;
 	}
 	
 	
 	@RequestMapping(value = "/login.app")
-	public ModelAndView login(@RequestParam String email, String password) {
+	public Object login(@RequestParam String email, String password, HttpSession session, String requestUrl) {
 
 		System.out.println("이메일 : " +email);
 		System.out.println("비밀번호 : " +password);
 
-		ModelAndView mav = new ModelAndView();
+		userVO = userService.validation_Check(email, password);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
 
-		int status = userService.validation_Check(email, password);
-
-		if(status==1) {
-
-			//session.setAttribute("email", email);
-
-			mav.setViewName("main/main");
-
-		} else if(status==2) {
-			System.out.println("패스워드가 틀렸습니다.");
-			mav.setViewName("home");
-
-		} else {
-			System.out.println("회원이 아닙니다.");
-			mav.setViewName("home");
+		if(userVO != null) {
+			session.setAttribute("loginUser", userVO);
+			resultMap.put("status", "success");
 			
+		} else {
+			session.invalidate();
+			resultMap.put("status", "fail");
 		}
 
-		return mav;
+		return resultMap;
 	}
 
 	
 }
+	
