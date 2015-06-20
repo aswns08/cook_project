@@ -1,8 +1,5 @@
 package kr.co.cooks.controller;
 
-import java.util.HashMap;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.cooks.service.UserService;
@@ -55,8 +52,39 @@ public class LoginControl {
 		
 		mav.setViewName("JSON");
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/loginUser.app")
+	public ModelAndView loginUser(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(session.getAttribute("loginUser") != null) {
+			mav.addObject("status", "success");
+			mav.addObject("loginUser", session.getAttribute("loginUser"));
+			
+		} else {
+			mav.addObject("status", "fail");
+		}
+		
+		mav.setViewName("JSON");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value = "/logoutUser.app")
+	public ModelAndView logoutUser(HttpSession session) {
+		
+		session.invalidate(); // session 끊어주는 메서드.
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("status", "success");
+		mav.setViewName("JSON");
+		
+		return mav;
+		
 	}
 
 	
