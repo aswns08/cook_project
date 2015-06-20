@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.cooks.dao.UserDao">
 
 	<select id="existUser" parameterType="Map" resultType="user">
-		select ID, PASSWORD, NAME, ADDRESS, PHONE, USER_LEVEL, MILEAGE from USERS where ID = #{id} AND password=#{password}
+		select ID, PASSWORD, NAME, ADDRESS, PHONE, USER_LEVEL, MILEAGE from USERS where ID = #{email} AND PASSWORD=#{password}
 	</select>
 	
 

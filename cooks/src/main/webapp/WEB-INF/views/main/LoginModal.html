@@ -1,3 +1,4 @@
+
 <style>
 .modal-header, .modal-sign-header, .close {
 	background-color: #5cb85c;
@@ -67,7 +68,7 @@
           <h4><span class="glyphicon glyphicon-lock"></span> 로그인</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form" action="/cooks/login.app" method="post">
+          <form role="form">
             <div class="form-group">
               <label for="email"><span class="glyphicon glyphicon-envelope"></span> 이메일</label>
               <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
@@ -78,7 +79,7 @@
               <input type="text" class="form-control" id="password" placeholder="Enter password" name="password">
             </div>
             
-            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>로그인</button>
+            <button type="button" id="loginBtn" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>로그인</button>
           </form>
         </div> <!-- modal body -->
         
