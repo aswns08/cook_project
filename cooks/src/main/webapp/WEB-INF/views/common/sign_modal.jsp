@@ -3,14 +3,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!-- 로그인 / 회원가입 / 비밀번호 찾기 -->
-    <!-- 회원가입 Modal -->
-  <div class="modal fade" id="signUp" role="dialog">
-    <div class="modal-dialog modal-sm">
+    
+     <!-- 로그인 Modal -->
+  <div class="modal fade" id="signIn" role="dialog">
+    <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" id="loginCloseBtn" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> 로그인</h4>
+        </div>
+        
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" id="loginForm">
+            <div class="form-group">
+              <label for="email"><span class="glyphicon glyphicon-envelope"></span> 이메일</label>
+              <input type="text" class="form-control" id="login_email" name="email" value='' placeholder="Enter email">
+            </div>
+            
+            <div class="form-group">
+              <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
+              <input type="password" class="form-control" id="login_password" name="password" value='' placeholder="Enter password">
+            </div>
+            
+            <button type="button" id="btnLogin" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>로그인</button>
+          </form>
+        </div> <!-- modal body -->
+        
+        <div class="modal-footer">
+          <p>회원이 아니십니까? <a onclick="close_signIn();" data-toggle="modal" href="#signUp" data-backdrop="static">회원가입</a></p>
+          <p>비밀번호를 잊어버리셨습니까? <a onclick="close_signIn();" data-toggle="modal" href="#findPassword" data-backdrop="static">비밀번호 찾기</a></p>      
+        </div> <!-- modal footer -->
+      </div> <!-- modal content -->      
+    </div>
+  </div>
+    
+    
+    <!-- 회원가입 Modal -->
+  <div class="modal fade" id="signUp" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" id="signUpCloseBtn" class="close" data-dismiss="modal">&times;</button>
           <h4><span class="glyphicon glyphicon-lock"></span> 회원가입</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
@@ -46,59 +83,24 @@
     </div>
   </div>
   
-  
- <!-- 로그인 Modal -->
-  <div class="modal fade" id="signIn" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> 로그인</h4>
-        </div>
-        
-        <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
-            <div class="form-group">
-              <label for="email"><span class="glyphicon glyphicon-envelope"></span> 이메일</label>
-              <input type="text" class="form-control" id="login_email" name="email" placeholder="Enter email">
-            </div>
-            
-            <div class="form-group">
-              <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
-              <input type="password" class="form-control" id="login_password" name="password" placeholder="Enter password">
-            </div>
-            
-            <button type="button" id="btnLogin" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>로그인</button>
-          </form>
-        </div> <!-- modal body -->
-        
-        <div class="modal-footer">
-          <p>회원이 아니십니까? <a onclick="close_signIn();" data-toggle="modal" href="#signUp">회원가입</a></p>
-          <p>비밀번호를 잊어버리셨습니까? <a onclick="close_signIn();" data-toggle="modal" href="#findPassword">비밀번호 찾기</a></p>      
-        </div> <!-- modal footer -->
-      </div> <!-- modal content -->      
-    </div>
-  </div>
     
   <!-- 비밀번호 찾기  Modal -->
-  <div class="modal fade" id="findPassword" role="dialog">
+  <div class="modal fade" id="findPwd" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" id="findPwdClose" class="close" data-dismiss="modal">&times;</button>
           <h4><span class="glyphicon glyphicon-lock"></span>비밀번호 찾기</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
           <form role="form">
             <div class="form-group">
-              <label for="find_email"><span class="glyphicon glyphicon-envelope"></span> 계정 이메일을 입력하세요</label>
-              <input type="text" class="form-control" id="find_email" placeholder="Enter email">
+              <label for="input_email"><span class="glyphicon glyphicon-envelope"></span> 계정 이메일을 입력하세요</label>
+              <input type="text" class="form-control" id="input_email" placeholder="Enter email">
             </div>  
-             <button type="button" onclick="close_findPassword();" class="btn btn-success btn-block" data-toggle="modal" data-target="#changePassword"><span class="glyphicon glyphicon-grain"></span> 인증번호 받기</button>
+             <button type="button" onclick="close_findPassword();" class="btn btn-success btn-block" data-toggle="modal" data-target="#changePassword" data-backdrop="static"><span class="glyphicon glyphicon-grain"></span> 인증번호 받기</button>
           </form>
         </div> <!-- modal body -->
         
@@ -110,13 +112,13 @@
     
   
   <!-- 비밀번호 변경  Modal -->
-  <div class="modal fade" id="changePassword" role="dialog">
+  <div class="modal fade" id="changePwd" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" id="changePwdClose" class="close" data-dismiss="modal">&times;</button>
           <h4><span class="glyphicon glyphicon-lock"></span>비밀번호 변경</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">

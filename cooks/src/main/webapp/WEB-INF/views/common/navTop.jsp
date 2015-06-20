@@ -18,9 +18,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                	<li id="loginBtn" style='display:none'><a><span class="glyphicon glyphicon-log-in" data-toggle="modal" data-target="#signIn"> 로그인</span></a></li>
+                	<li id="loginBtn" style='display:none'><a><span class="glyphicon glyphicon-log-in" data-toggle="modal" data-target="#signIn" data-backdrop="static"> 로그인</span></a></li>
                 	<li id="logoutBtn" style='display:none'><a><span class="glyphicon glyphicon-log-out" > 로그아웃</span></a></li>
-        			<li><a><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#signUp"> 회원가입</span></a></li>
+        			<li><a><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#signUp" data-backdrop="static"> 회원가입</span></a></li>
         			<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
                 	
       			</ul>
