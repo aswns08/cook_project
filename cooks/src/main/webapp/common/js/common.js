@@ -2,9 +2,6 @@
 $(document).ready(function () {
 	
 	$('#btnLogin').click(function () {
-		console.log("이메일 : " ,$("#login_email").val());
-		console.log("이메일 : " ,$("#login_password").val());
-		
 		$.ajax({
 			type: "POST",
 			url: "/cooks/login.app",
@@ -31,6 +28,7 @@ $(document).ready(function () {
 		}); // ajax
 		
 	}); // click(function)
+
 	
 	// modal 창 닫을 때  modal 폼 reset 해주는 함수들.
 	$('#loginCloseBtn').click(function(event) {

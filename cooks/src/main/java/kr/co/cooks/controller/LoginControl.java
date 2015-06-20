@@ -58,6 +58,9 @@ public class LoginControl {
 	@RequestMapping(value = "/loginUser.app")
 	public ModelAndView loginUser(HttpSession session) {
 		
+		
+		System.out.println("session 정보 : " +session.getAttribute("loginUser"));
+		
 		ModelAndView mav = new ModelAndView();
 		
 		if(session.getAttribute("loginUser") != null) {

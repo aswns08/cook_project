@@ -76,7 +76,7 @@
             	<label for="signUp_phone"><span class="glyphicon glyphicon-phone"></span> 연락처</label>
 		      <input type="text" class="form-control" id="signUp_phone" placeholder="Enter phone number">
             </div>
-            <button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>회원가입</button>
+            <button type="button" id="btnSignUp" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>회원가입</button>
           </form>          
         </div> <!-- modal body -->
       </div> <!-- modal content -->      

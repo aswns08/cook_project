@@ -16,29 +16,21 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="main/css/main.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
     <link href="main/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
     <link href="main/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='common/css/modalStyle.css' rel='stylesheet'>
     
-    <link rel='stylesheet' href='common/css/modalStyle.css'>
-
-
-
-<!-- jQuery -->
+    <!-- jQuery -->
     <script src="js/jquery-1.11.1.js"></script>
-    <script src="common/js/common.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<!-- Custom JS -->
+    <script src="common/js/common.js"></script>
+    <script src="common/js/signUp.js"></script>
 
 </head>
-
 <body>
 
 <jsp:include page="../common/navTop.jsp"/>
@@ -262,6 +254,5 @@
     
 	<jsp:include page="../common/sign_modal.jsp"/>
 	
- 
 </body>
 </html>

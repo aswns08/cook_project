@@ -8,6 +8,10 @@
 		select ID, PASSWORD, NAME, ADDRESS, PHONE, USER_LEVEL, MILEAGE from USERS where ID = #{email} AND PASSWORD=#{password}
 	</select>
 	
+	<insert id="signUpUser">
+		insert into USERS values(#{id}, #{password}, #{name}, #{address}, #{phone}, #{user_Level}, #{mileage} )
+	</insert>
+	
 
 </mapper>
 

@@ -24,5 +24,10 @@ public class UserService {
 		return userDao.existUser(params);
 		
 	}
+	
+	public void signUpUser(UserVO userVO) {
+		
+		userDao.signUpUser(userVO);
+	}
 
 }
