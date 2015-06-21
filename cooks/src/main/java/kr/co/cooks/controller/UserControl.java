@@ -1,5 +1,7 @@
 package kr.co.cooks.controller;
 
+import javax.servlet.http.HttpSession;
+
 import kr.co.cooks.service.UserService;
 import kr.co.cooks.vo.UserVO;
 
@@ -29,6 +31,30 @@ public class UserControl {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("status", "success");
 		mav.setViewName("JSON");
+		return mav;
+	}
+	
+	@RequestMapping(value = "userInfo.app")
+	public String userInfo(HttpSession session) {
+		
+		System.out.println("session 값 : " +session.getAttribute("loginUser"));
+		
+		return "user/mypage_UserInfo";
+	}
+	
+	@RequestMapping(value = "userUpdate.app")
+	public ModelAndView userUpdate(@ModelAttribute UserVO userVO, HttpSession session) {
+		
+		System.out.println("JSON으로 넘어온 user정보 : " +userVO);
+
+		userService.userUpdate(userVO);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		session.setAttribute("loginUser", userVO);
+		mav.addObject("status", "success");
+		mav.setViewName("JSON");
+		
 		return mav;
 	}
 	

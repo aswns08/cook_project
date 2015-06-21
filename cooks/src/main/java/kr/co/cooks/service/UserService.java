@@ -30,4 +30,8 @@ public class UserService {
 		userDao.signUpUser(userVO);
 	}
 
+	public void userUpdate(UserVO userVO) {
+		
+		userDao.userUpdate(userVO);
+	}
 }

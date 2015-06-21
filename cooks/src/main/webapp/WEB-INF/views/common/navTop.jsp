@@ -13,17 +13,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">Cook's</a>
+                <a class="navbar-brand topnav" href="/cooks/cooksMain.app">Cook's</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
         			<li id="signUpBtn"><a><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#signUp" data-backdrop="static"> 회원가입</span></a></li>
-        			<li id="userPage" style='display:none'><a><span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#signUp" data-backdrop="static"> ${loginUser.name }</span></a></li>
+        			<li id="userPage" style='display:none'><a><span class="glyphicon glyphicon-user"> ${loginUser.name }</span></a></li>
                 	<li id="loginBtn"><a><span class="glyphicon glyphicon-log-in" data-toggle="modal" data-target="#signIn" data-backdrop="static"> 로그인</span></a></li>
                 	<li id="logoutBtn" style='display:none'><a><span class="glyphicon glyphicon-log-out" > 로그아웃</span></a></li>
         			<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
-                	
       			</ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -78,7 +77,7 @@ $.getJSON('/cooks/loginUser.app', function(data) {
 		$('#signUpBtn').css('display', '');
 		
 	} else {
-		console.log("data정보 : ", data.loginUser)		
+		console.log("data정보 : ", data.loginUser)
 		$('#logoutBtn').css('display', '');
 		$('#userPage').css('display', '');
 		$('#loginBtn').css('display', 'none');
@@ -86,7 +85,7 @@ $.getJSON('/cooks/loginUser.app', function(data) {
 	}
 });
 	
-/* 로그아웃 함수. */
+/* 로그아웃. */
 $('#logoutBtn').click(function(event) {
 	
 	$.getJSON('/cooks/logoutUser.app', function(data) {
@@ -98,4 +97,11 @@ $('#logoutBtn').click(function(event) {
 	});
 	
 });
+
+/* 회원정보 페이지 */
+$('#userPage').click(function(event) {
+	location.href = '/cooks/userInfo.app';
+});
+
+
 </script>

@@ -235,11 +235,9 @@
 		</div>
 	</div> <!-- /container -->
 
-
+<!-- ................ Footer container ............ -->
 	<div class="container">
-
         <hr>
-
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -248,11 +246,10 @@
                 </div>
             </div>
         </footer>
-
     </div>
     <!-- /.container -->
     
-	<jsp:include page="../common/sign_modal.jsp"/>
+<jsp:include page="../common/sign_modal.jsp"/>
 	
 </body>
 </html>
