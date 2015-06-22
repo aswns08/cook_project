@@ -1,7 +1,7 @@
 var signUpCheckName = true;
 var signUpCheckPwd = false;
 var signUpCheckName2 = false;
-var regExp6 = /^[0-9a-zA-Z가-힣]([-_\.]?[0-9a-zA-Z가-힣])*$/i; //닉네임
+var regExp6 = /^[0-9a-zA-Z가-힣]([-_\.]?[0-9a-zA-Z가-힣])*$/i; //닉네임 (특수문자)
 
 // $(document).ready(function() { });
 $(function() {
@@ -22,7 +22,8 @@ $(function() {
 	
 }); // $(function)
 
-function checkName() { //닉네임 유효성검사
+/* 닉네임 유효성검사 */
+function checkName() { 
 	var nickName = $('#userName').val();
 	if (nickName == "" || nickName.length == 0) {
 		document.getElementById('check_userName').style.color = "red";
@@ -37,18 +38,19 @@ function checkName() { //닉네임 유효성검사
 	}
 }
 
+/* 닉네임 중복체크 */
 function signUpCheck(data){
 	if (data.result == "사용 가능한 닉네임 입니다.") {
-		$('#checkName').css("color", "blue");
+		$('#check_userName').css("color", "blue");
 		signUpCheckName = true;
 		return true;
-	}else if(loginUser.name == $('#name').val() & data.result == "중복된 닉네임이 존재합니다."){
-		$('#checkName').css("color", "green");
+	}else if(loginUser.name == $('#userName').val() & data.result == "중복된 닉네임이 존재합니다."){
+		$('#check_userName').css("color", "green");
 		data.result = "닉네임이 변경되지 않았습니다.(사용가능)";
 		signUpCheckName = true;
 		return true;
 	}else if (data.result == "중복된 닉네임이 존재합니다.") {
-		$('#checkName').css("color", "red");
+		$('#check_userName').css("color", "red");
 		signUpCheckName = false;
 		return false;
 	}
