@@ -18,29 +18,39 @@ public class ReviewControl {
 	
 	@Autowired ReviewService reviewService;
 	
-	
 	private static final Logger logger = LoggerFactory.getLogger(ReviewControl.class);
 	static final int PAGE_DEFAULT_SIZE = 5;
 	
+	
+	@RequestMapping(value = "/reviewListView.app")
+	public ModelAndView reviewListView() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("board_review/reviewList");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/reviewList.app")
-	public ModelAndView reviewList(@RequestParam(defaultValue = "1") int pageNo,
+	public ModelAndView reviewList(@RequestParam(defaultValue = "1") int pageNum,
 									@RequestParam(defaultValue = "5") int pageSize) {
 		
 		if(pageSize <= 0)
 			pageSize = PAGE_DEFAULT_SIZE;
 		
-		int endPageNo = reviewService.getEndPageNo(pageSize);
+		// 끝페이지 계산하는 메서드.
+		int endPageNum = reviewService.getEndPageNum(pageSize);
 		
-		if(pageNo <= 0 ) pageNo = 1;
-		if(pageNo > endPageNo) pageNo = endPageNo;
+		if(pageNum <= 0 ) pageNum = 1; // 페이지번호가 0보다 작거나 같을 수 없으니까 1페이지로 셋팅.
+		if(pageNum > endPageNum) pageNum = endPageNum; // 페이지번호가 끝페이지 보다 클 경우에는 끝페이지번호가 페이지번호.
 		
-		List<?> reviewList = reviewService.getReviewList(pageNo, pageSize);
+		List<?> reviewList = reviewService.getReviewList(pageNum, pageSize);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("status", "success");
-		mav.addObject("currentPageNo", pageNo);
-		mav.addObject("endPageNo", endPageNo);
+		mav.addObject("currentPageNum", pageNum);
+		mav.addObject("endPageNum", endPageNum);
 		mav.addObject("reviewList", reviewList);
 		mav.setViewName("JSON");
 		

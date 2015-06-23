@@ -14,21 +14,21 @@ public class ReviewService {
 	
 	@Autowired ReviewDao reviewDao ;
 	
-	public int getEndPageNo(int pageSize) {
+	public int getEndPageNum(int pageSize) {
 		
 		int totalSize = reviewDao.totalSize();
-		int endPageNo = totalSize / pageSize;
+		int endPageNum = totalSize / pageSize;
 		
 		if( (totalSize % pageSize) > 0 )
-			endPageNo++;
+			endPageNum++;
 		
-		return endPageNo;
+		return endPageNum;
 	}
 	
-	public List<?> getReviewList(int pageNo, int pageSize) {
+	public List<?> getReviewList(int pageNum, int pageSize) {
 		
 		HashMap<String, Object> paramMap = new HashMap<>();
-		paramMap.put("startRow", ((pageNo-1) * pageSize) );
+		paramMap.put("startRow", ((pageNum-1) * pageSize) );
 		paramMap.put("pageSize", pageSize);
 		
 		return reviewDao.getReviewList(paramMap);

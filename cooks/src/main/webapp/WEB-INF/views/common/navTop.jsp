@@ -51,13 +51,13 @@
                         <a href="#">맛집</a>
                     </li>
                     <li>
-                        <a href="#">커뮤니티</a>
+                        <a href="recipeList.app">커뮤니티</a>
                     </li>
                     <li>
                         <a href="#">공지사항</a>
                     </li>
                     <li>
-                        <a href="#">음식후기</a>
+                        <a href="reviewListView.app">음식후기</a>
                     </li>
                 </ul>
             </div>

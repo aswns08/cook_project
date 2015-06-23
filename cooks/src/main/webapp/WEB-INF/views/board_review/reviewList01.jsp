@@ -86,8 +86,8 @@
 
 		<div id="addBtn" class="form-group" style="display: none">
 			<div class="col-sm-10" style="padding-left: 0px;">
-				<button type="button" class="btn btn-default">사진추가</button>
-				<button type="button" class="btn btn-default col-sm-offset-9">글쓰기</button>
+				<button type="submit" class="btn btn-default">사진추가</button>
+				<button type="submit" class="btn btn-default col-sm-offset-9">글쓰기</button>
 			</div>
 		</div>
 	</form>
@@ -104,11 +104,25 @@
 									<th style="width: 10%; text-align: center;">평점</th>
 								</tr>
 							</thead>
-							<tbody id='reviewListTbody' style="font-size: 11px;">
-								<!-- review.js 에서 반복문으로 <tr>, <td>를 append 함. -->
+							<tbody style="font-size: 11px;">
+							
+							<c:forEach var="reviewList" items="${reviewList }">
+							
+								<tr style="height: 5em;">
+									<td style="vertical-align:middle;">${reviewList.re_Num }</td>
+									<td style="vertical-align:middle;"><img src="community/images/galbi.jpg" style="width: 95%; height: 5em;"></td>
+									<td style="vertical-align:middle;">${reviewList.re_Title }</td>
+									<td style="vertical-align:middle; text-align: center;">${reviewList.id }</td>
+									<td style="vertical-align:middle; text-align: center;">${reviewList.re_Date }</td>
+									<td style="vertical-align:middle; text-align: center;">★★★★★</td>
+								</tr>
+								
+							</c:forEach>
+							
 							</tbody>
 						</table>
 						
+						<button type="submit" class="btn btn-sm btn-default">글쓰기</button>
 					</div>
 
 				</div>

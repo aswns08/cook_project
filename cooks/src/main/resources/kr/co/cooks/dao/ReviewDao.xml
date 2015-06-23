@@ -11,10 +11,10 @@
 	<select id="getReviewList" parameterType="HashMap" resultType="reviewVO">
 		select RE_NUM, ID, RE_TITLE, RE_CONTENT, RE_DATE, RE_GRADE, RE_FNAME, RE_DEPT, RE_POSITION, F_NUM
 		FROM REVIEW
-		ORDER BY RE_NUM
 		<if test="pageSize > 0">
-			limit #{startRow}, #{pageSize}
+			where rownum between #{startRow} and #{pageSize}
 		</if>
+		ORDER BY RE_NUM
 	</select>
 	
 

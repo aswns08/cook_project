@@ -4,8 +4,10 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias alias="user" type="kr.co.cooks.vo.UserVO"/>
-		<typeAlias alias="review" type="kr.co.cooks.vo.ReviewVO"/>
+		<typeAlias alias="userVO" type="kr.co.cooks.vo.UserVO"/>
+		<typeAlias alias="reviewVO" type="kr.co.cooks.vo.ReviewVO"/>
+		<typeAlias alias="recipeVO" type="kr.co.cooks.vo.RecipeBoardVO"/>
+		<typeAlias alias="commentVO" type="kr.co.cooks.vo.RecipeCommentVO"/>
 	</typeAliases>
 	
 </configuration>
