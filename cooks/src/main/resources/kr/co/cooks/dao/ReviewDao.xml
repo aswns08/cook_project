@@ -9,13 +9,21 @@
 	</select>
 	
 	<select id="getReviewList" parameterType="HashMap" resultType="reviewVO">
-		select RE_NUM, ID, RE_TITLE, RE_CONTENT, RE_DATE, RE_GRADE, RE_FNAME, RE_DEPT, RE_POSITION, F_NUM
+		select RE_NUM, ID, RE_CONTENT, RE_DATE, RE_GRADE, RE_DEPT, RE_POSITION, F_NUM
 		FROM REVIEW
 		<if test="pageSize > 0">
 			where rownum between #{startRow} and #{pageSize}
 		</if>
-		ORDER BY RE_NUM
+		ORDER BY RE_NUM DESC
 	</select>
+	
+	<insert id="insertReview" parameterType="reviewVO">
+		insert into REVIEW values(review_seq.NEXTVAL, #{id}, #{re_Content}, sysdate, #{re_Grade}, #{re_Dept}, #{re_Position}, #{f_Num})
+	</insert>
+	
+	<insert id="insertFileUpload" parameterType="reviewFileVO">
+		insert into REVIEW_FILELIST values(reviewfile_seq.NEXTVAL, #{originFileName}, #{saveFileName}, #{fileSize}, review_seq.CURRVAL)
+	</insert>
 	
 
 </mapper>

@@ -2,14 +2,20 @@ package kr.co.cooks.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import kr.co.cooks.service.ReviewService;
+import kr.co.cooks.vo.ReviewVO;
+import kr.co.cooks.vo.UserVO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -17,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ReviewControl {
 	
 	@Autowired ReviewService reviewService;
+	UserVO userVO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReviewControl.class);
 	static final int PAGE_DEFAULT_SIZE = 5;
@@ -33,7 +40,7 @@ public class ReviewControl {
 	
 	@RequestMapping(value = "/reviewList.app")
 	public ModelAndView reviewList(@RequestParam(defaultValue = "1") int pageNum,
-									@RequestParam(defaultValue = "5") int pageSize) {
+									@RequestParam(defaultValue = "10") int pageSize) {
 		
 		if(pageSize <= 0)
 			pageSize = PAGE_DEFAULT_SIZE;
@@ -54,6 +61,27 @@ public class ReviewControl {
 		mav.addObject("reviewList", reviewList);
 		mav.setViewName("JSON");
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/writeReview.app")
+	public ModelAndView insertReview(@ModelAttribute ReviewVO reviewVO, HttpSession session, MultipartHttpServletRequest multipartReq) {
+		
+		System.out.println("reviewVO 요청이 들어옴" +reviewVO);
+		System.out.println("multipartReq 요청 ========" +multipartReq);
+		System.out.println("multipartReq.getFileNames 요청 ========" +multipartReq.getFileNames());
+		
+		
+		userVO = (UserVO)session.getAttribute("loginUser");
+		reviewVO.setId(userVO.getId()); // session 의 id를 가져와서 reviewVO에 set 해줌.
+		System.out.println("아이디값 set 해줌 : " +reviewVO);
+		
+		
+		reviewService.insertReview(reviewVO, multipartReq);
+		
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject("status", "success");
+		mav.setViewName("board_review/reviewList");
 		return mav;
 	}
 	

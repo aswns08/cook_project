@@ -3,8 +3,34 @@ var endPageNum;
 
 // $(document).ready(function() {}) ;
 $(function () {
-	loadReviewList(1);
 	
+	loadReviewList(1);
+/*	
+	$('#writeReviewBtn').click(function () {
+		console.log("글쓰기 이벤트 발생");
+		$.ajax({
+			type: "POST",
+			url: "/cooks/login.app",
+			async: true,
+			dataType: "json",
+			data: formdata,
+			success : function(data) {
+				if(data.status == "success") {
+					alert("등록성공");
+					loadReviewList(1);
+					// 폼 리셋 시켜주는 $('#btnCancel').click(); 이벤트 추가.
+				} else 
+					alert("등록실패");
+			},
+			error : function(xhr) {
+				console.log("error", xhr);
+				alert("error html = " + xhr.statusText);
+			} // error
+			
+		}); // ajax
+		
+	}); // click(function)
+*/	
 	
 }); //document.ready
 
@@ -28,33 +54,7 @@ function setPageNum(currentPageNum, endPageNum) {
 	
 } // setPageNum
 
-$('#writeReviewBtn').click(function(event) {
-	
-	$.post('/cooks/writeReply.app',
-			{
-				id : loginUser.id,
-				re_Title : $('#re_Title'),
-				re_Content : $('#re_Content'),
-				re_Date : $('#re_Date'),
-				re_Grade : $('#re_Grade'),
-				re_Fname : $('#re_Fname'),
-				re_Dept : $('#re_Dept'),
-				re_Position : $('#re_Position'),
-				f_Num : $('#f_Num')
-			
-			}, function(data) {
-				
-				if(data.status == "success") {
-					alert("등록성공");
-					// 폼 리셋 시켜주는 $('#btnCancel').click(); 이벤트 추가.
-				} else 
-					alert("등록실패");
-			}, 'JSON' /* function(data) */  )
-			/* 서버 요청이 실패할 경우 호출될 함수 등록. */
-			.fail(function(jqXHR, textStatus, errorThrown) {
-				alert(textStatus + ":" +errorThrown);
-			});
-});
+
 
 
 // 리뷰리스트
@@ -83,7 +83,7 @@ function loadReviewList(pageNum) {
 					$('<td>').append(
 							$('<a>').attr('href', '#')
 									.attr('data-replyNo', reviewList[i].re_Num)
-									.html(reviewList[i].re_Title)
+									.html(reviewList[i].re_Content)
 							)
 							.css('vertical-align', 'middle')
 						)

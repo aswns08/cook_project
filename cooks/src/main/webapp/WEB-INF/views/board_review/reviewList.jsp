@@ -20,7 +20,7 @@
     <link href='common/css/modalStyle.css' rel='stylesheet'>
 
 	<style>
-	#teamMember {
+	#reContentWrap {
 		height: 30px;
 		-webkit-transition: all 0.3s ease;
 		-moz-transition: all 0.3s ease;
@@ -28,7 +28,7 @@
 		transition: all 0.3s ease;
 	}
 	
-	#teamMember.fullSize {
+	#reContentWrap.fullSize {
 		height: 80px;
 		-webkit-transition: all 0.3s ease;
 		-moz-transition: all 0.3s ease;
@@ -77,20 +77,25 @@
 					<h2 class="sub-header">Cook's Review</h2>
 					
 					
-	<form>
-		<div class="form-group">
-			<div id="teamMember" style="cursor: text">
-				<textarea id="textA" cols="100%" placeholder="무슨 일이 일어나고 있나요?"></textarea>
-			</div>
+		<div id="tweetFrom">			
+			<form id="hiddenForm" action="/cooks/writeReview.app" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+				
+					<div id="reContentWrap" style="cursor: text">
+						<textarea id="re_Content" name="re_Content" cols="100%" placeholder="무슨 일이 일어나고 있나요?"></textarea>
+						<div id="addBtn" class="col-sm-10" style="padding-left: 0px;">
+							평점 :<input type="text" id="re_Grade" name="re_Grade">
+							<input type="file" value="사진추가" id="re_Fname" multiple name="re_Fname" style="display: inline-block; width: 180px;">
+							<input type="submit" id="writeReviewBtn" value="글쓰기" style="display: inline-block;" >
+						</div>
+						
+					</div>
+				</div>
+		
+					
+			</form>
 		</div>
-
-		<div id="addBtn" class="form-group" style="display: none">
-			<div class="col-sm-10" style="padding-left: 0px;">
-				<button type="button" class="btn btn-default">사진추가</button>
-				<button type="button" class="btn btn-default col-sm-offset-9">글쓰기</button>
-			</div>
-		</div>
-	</form>
+		
 					
 					<div class="table-responsive">
 						<table class="table table-striped" id='reviewListTable'>
@@ -135,23 +140,23 @@
 <jsp:include page="../common/sign_modal.jsp"/>
 
 	<script>
-		$('#textA').click(function() {
-			$('#textA').removeAttr('placeholder');
-			if ($('#teamMember').hasClass('fullSize')) {} 
+		$('#re_Content').click(function() {
+			$('#re_Content').removeAttr('placeholder');
+			if ($('#reContentWrap').hasClass('fullSize')) {} 
 			else {
-				$('#teamMember').addClass('fullSize');
+				$('#reContentWrap').addClass('fullSize');
 				$('#addBtn').css('display', '');
 			}
 		});
 
-		$('#textA').focusout(function() {
-			if ($('#textA').val().length > 0) {
+		$('#tweetFrom').focusout(function() {
+			if ($('#re_Content').val().length > 0) {
 
 			} else {
 
-				$('#textA').attr('placeholder', '여러분의 후기를 남겨주세요~');
-				$('#teamMember').removeClass('fullSize');
-				$('#addBtn').css('display', 'none');
+				$('#re_Content').attr('placeholder', '여러분의 후기를 남겨주세요~');
+				$('#reContentWrap').removeClass('fullSize');
+				//$('#addBtn').css('display', 'none');
 			}
 		});
 		
