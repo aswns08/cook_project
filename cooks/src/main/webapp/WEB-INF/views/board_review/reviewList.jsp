@@ -77,12 +77,12 @@
 					<h2 class="sub-header">Cook's Review</h2>
 					
 					
-		<div id="tweetFrom">			
-			<form id="hiddenForm" action="/cooks/writeReview.app" method="post" enctype="multipart/form-data">
+		<div id="tweetFromDiv">			
+			<form id="tweetFrom" action="/cooks/writeReview.app" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 				
 					<div id="reContentWrap" style="cursor: text">
-						<textarea id="re_Content" name="re_Content" cols="100%" placeholder="무슨 일이 일어나고 있나요?"></textarea>
+						<textarea id="re_Content" name="re_Content" cols="100%" placeholder="음식의 맛은 어땠나요?"></textarea>
 						<div id="addBtn" class="col-sm-10" style="padding-left: 0px;">
 							평점 :<input type="text" id="re_Grade" name="re_Grade">
 							<input type="file" value="사진추가" id="re_Fname" multiple name="re_Fname" style="display: inline-block; width: 180px;">
@@ -140,6 +140,7 @@
 <jsp:include page="../common/sign_modal.jsp"/>
 
 	<script>
+	// 리스트를 불러올 때 세션을 넘겨 받아서 세션이 NULL 값이면 글쓰기 버튼을 눌렀을 때 모달을 띄우도록 구현
 		$('#re_Content').click(function() {
 			$('#re_Content').removeAttr('placeholder');
 			if ($('#reContentWrap').hasClass('fullSize')) {} 

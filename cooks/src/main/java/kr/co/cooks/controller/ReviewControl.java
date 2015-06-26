@@ -23,13 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ReviewControl {
-	
+	private static final Logger logger = LoggerFactory.getLogger(ReviewControl.class);
+
 	@Autowired ReviewService reviewService;
 	UserVO userVO;
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReviewControl.class);
-	static final int PAGE_DEFAULT_SIZE = 5;
-	
+	static final int PAGE_DEFAULT_SIZE = 10;
 	
 	@RequestMapping(value = "/reviewListView.app")
 	public ModelAndView reviewListView() {
@@ -70,15 +69,10 @@ public class ReviewControl {
 	@RequestMapping(value = "/writeReview.app", method = RequestMethod.POST)
 	public ModelAndView insertReview(@ModelAttribute ReviewVO reviewVO, HttpSession session, MultipartHttpServletRequest multipartReq) {
 		
-		System.out.println("reviewVO 요청이 들어옴" +reviewVO);
-		System.out.println("multipartReq 요청 ========" +multipartReq);
-		System.out.println("multipartReq.getFileNames 요청 ========" +multipartReq.getFileNames());
-		
+		//System.out.println("reviewVO 요청이 들어옴" +reviewVO);
 		
 		userVO = (UserVO)session.getAttribute("loginUser");
 		reviewVO.setId(userVO.getId()); // session 의 id를 가져와서 reviewVO에 set 해줌.
-		System.out.println("아이디값 set 해줌 : " +reviewVO);
-		
 		
 		reviewService.insertReview(reviewVO, multipartReq);
 		
@@ -87,6 +81,24 @@ public class ReviewControl {
 		mav.setViewName("board_review/reviewList");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/deleteReview.app", method = RequestMethod.GET)
+	public ModelAndView deleteReview(@RequestParam int re_Num, HttpSession session)  {
+		
+		userVO = (UserVO)session.getAttribute("loginUser");
+		
+		System.out.println("re_Num번 삭제요청 : "+re_Num);
+		
+		ModelAndView mav = new ModelAndView();
+		reviewService.deleteReview(re_Num);
+		
+		mav.addObject("status", "success");
+		mav.setViewName("JSON");
+		return mav;
+		
+	}
+	
+	
 	
 
 }
