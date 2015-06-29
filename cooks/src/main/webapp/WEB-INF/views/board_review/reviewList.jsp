@@ -20,27 +20,51 @@
     <link href='common/css/modalStyle.css' rel='stylesheet'>
 
 	<style>
-	#reContentWrap {
-		height: 30px;
-		-webkit-transition: all 0.3s ease;
-		-moz-transition: all 0.3s ease;
-		-o-transition: all 0.3s ease;
-		transition: all 0.3s ease;
-	}
-	
-	#reContentWrap.fullSize {
-		height: 80px;
-		-webkit-transition: all 0.3s ease;
-		-moz-transition: all 0.3s ease;
-		-o-transition: all 0.3s ease;
-		transition: all 0.3s ease;
-	}
-	
-	textarea {
-		height: 100%;
-		resize: none;
-	}
-	</style>
+#reContentWrap {
+	height: 30px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+#reContentWrap.fullSize {
+	height: 80px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+textarea {
+	height: 100%;
+	resize: none;
+}
+
+.star_rating {
+	font-size: 0;
+	letter-spacing: -4px;
+}
+
+.star_rating a {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin-left: 0;
+}
+
+.star_rating a.on {
+	color: #FFF522;
+}
+
+
+</style>
 
 	<!-- jQuery -->
     <script src="js/jquery-1.11.1.js"></script>
@@ -83,12 +107,22 @@
 				
 					<div id="reContentWrap" style="cursor: text">
 						<textarea id="re_Content" name="re_Content" cols="100%" placeholder="음식의 맛은 어땠나요?"></textarea>
-						<div id="addBtn" class="col-sm-10" style="padding-left: 0px;">
-							평점 :<input type="text" id="re_Grade" name="re_Grade">
-							<input type="file" value="사진추가" id="re_Fname" multiple name="re_Fname" style="display: inline-block; width: 180px;">
-							<input type="submit" id="writeReviewBtn" value="글쓰기" style="display: inline-block;" >
-						</div>
+						<div id="addBtn" class="col-sm-10" style="padding-left: 0px; width:100%">
 						
+							별점 : <p id="star_rating" class="star_rating" style="display: inline-block; width: 15%;"> 
+							    <a href="#" class="on" id=reviewStar1>★</a>
+							    <a href="#" class="on" id=reviewStar2>★</a>
+							    <a href="#" class="on" id=reviewStar3>★</a>
+							    <a href="#" id=reviewStar4>★</a>
+							    <a href="#" id=reviewStar5>★</a>
+							</p>
+							
+							<input type="file" value="사진추가" id="re_Fname" multiple name="re_Fname" style="display: inline-block; width: 52%;">
+							<input type="submit" id="writeReviewBtn" value="글쓰기" style="display: inline-block;" >
+							<input type="hidden" value="3" id="re_Grade" name="re_Grade">
+							<br>
+						</div>
+						<br>
 					</div>
 				</div>
 		
@@ -138,31 +172,6 @@
     <!-- /.container -->
     
 <jsp:include page="../common/sign_modal.jsp"/>
-
-	<script>
-	// 리스트를 불러올 때 세션을 넘겨 받아서 세션이 NULL 값이면 글쓰기 버튼을 눌렀을 때 모달을 띄우도록 구현
-		$('#re_Content').click(function() {
-			$('#re_Content').removeAttr('placeholder');
-			if ($('#reContentWrap').hasClass('fullSize')) {} 
-			else {
-				$('#reContentWrap').addClass('fullSize');
-				$('#addBtn').css('display', '');
-			}
-		});
-
-		$('#tweetFrom').focusout(function() {
-			if ($('#re_Content').val().length > 0) {
-
-			} else {
-
-				$('#re_Content').attr('placeholder', '여러분의 후기를 남겨주세요~');
-				$('#reContentWrap').removeClass('fullSize');
-				//$('#addBtn').css('display', 'none');
-			}
-		});
-		
-		
-	</script>
 
 </body>
 </html>

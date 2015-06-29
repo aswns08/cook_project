@@ -28,7 +28,7 @@ public class ReviewControl {
 	@Autowired ReviewService reviewService;
 	UserVO userVO;
 	
-	static final int PAGE_DEFAULT_SIZE = 10;
+	static final int PAGE_DEFAULT_SIZE = 15;
 	
 	@RequestMapping(value = "/reviewListView.app")
 	public ModelAndView reviewListView() {
@@ -41,7 +41,8 @@ public class ReviewControl {
 	
 	@RequestMapping(value = "/reviewList.app")
 	public ModelAndView reviewList(@RequestParam(defaultValue = "1") int pageNum,
-									@RequestParam(defaultValue = "10") int pageSize) {
+									@RequestParam(defaultValue = "15") int pageSize,
+									HttpSession session) {
 		
 		if(pageSize <= 0)
 			pageSize = PAGE_DEFAULT_SIZE;
@@ -56,6 +57,12 @@ public class ReviewControl {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		// session에 "loginUser"가 있으면 loginUser_Id를 담아서 보냄. => 로그인 한 사람만 글 쓰게 하기 위해.
+		if(session.getAttribute("loginUser") != null) {
+			userVO = (UserVO)session.getAttribute("loginUser");
+			mav.addObject("loginUser_Id", userVO.getId());
+		}
+		
 		mav.addObject("status", "success");
 		mav.addObject("currentPageNum", pageNum);
 		mav.addObject("endPageNum", endPageNum);
@@ -65,27 +72,27 @@ public class ReviewControl {
 		return mav;
 	}
 	
-	@Transactional()
 	@RequestMapping(value = "/writeReview.app", method = RequestMethod.POST)
 	public ModelAndView insertReview(@ModelAttribute ReviewVO reviewVO, HttpSession session, MultipartHttpServletRequest multipartReq) {
-		
-		//System.out.println("reviewVO 요청이 들어옴" +reviewVO);
-		
+
+		//System.out.println(multipartReq.getParameter("re_Content"));
+		System.out.println("멀티파트" +multipartReq.getFile("re_Fname").getOriginalFilename());
 		userVO = (UserVO)session.getAttribute("loginUser");
 		reviewVO.setId(userVO.getId()); // session 의 id를 가져와서 reviewVO에 set 해줌.
-		
+
 		reviewService.insertReview(reviewVO, multipartReq);
 		
 		ModelAndView mav = new ModelAndView();
 		//mav.addObject("status", "success");
 		mav.setViewName("board_review/reviewList");
+
 		return mav;
 	}
 	
 	@RequestMapping(value = "/deleteReview.app", method = RequestMethod.GET)
 	public ModelAndView deleteReview(@RequestParam int re_Num, HttpSession session)  {
 		
-		userVO = (UserVO)session.getAttribute("loginUser");
+		//userVO = (UserVO)session.getAttribute("loginUser");
 		
 		System.out.println("re_Num번 삭제요청 : "+re_Num);
 		

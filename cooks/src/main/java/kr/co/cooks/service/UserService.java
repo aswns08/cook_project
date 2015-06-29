@@ -14,6 +14,14 @@ public class UserService {
 	@Autowired UserDao userDao;
 	UserVO userVO;
 	
+	public String signUpEmailCheck(String signUp_email) {
+		
+		return userDao.signUpEmailCheck(signUp_email);
+		
+		
+	}
+	
+	
 	public UserVO validation_Check(String email, String password) {
 		
 		HashMap<String, String> params = new HashMap<>();

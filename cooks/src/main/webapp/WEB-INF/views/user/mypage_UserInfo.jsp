@@ -40,8 +40,7 @@
         
         <div class="row row-offcanvas row-offcanvas-left">
 
-				<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar"
-					role="navigation">
+				<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
 					<ul class="nav nav-sidebar" style="margin-top: 15px;">
 						<li class="active"><a href="#">주문내역/취소</a></li>
@@ -71,7 +70,7 @@
 								<div class="form-group">
 
 									<label for="usr">아이디</label>
-									<input readonly type="text" class="form-control" placeholder="E-mail" id="userId" value="${loginUser.id }">
+									<input type="text" class="form-control" placeholder="E-mail" id="userId" value="${loginUser.id }" disabled>
 									<br>
 									
 									<label for="password">비밀번호 변경</label>

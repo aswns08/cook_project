@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,6 +22,26 @@ public class UserControl {
 	
 	@Autowired UserService userService;
 	UserVO userVO;
+	
+	@RequestMapping(value = "/emailCheck", method=RequestMethod.POST)
+	public ModelAndView signUpEmailCheck(@RequestParam String signUp_email) {
+		
+		System.out.println("이메일 중복검사 : " +signUp_email);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String email = userService.signUpEmailCheck(signUp_email);
+		if(email == null) {
+			mav.addObject("status", "success");
+			mav.setViewName("JSON");
+			
+		} else {
+			mav.addObject("status", "fail");
+			mav.setViewName("JSON");
+		}
+		
+		 return mav;
+	}
 	
 	@RequestMapping(value = "/signUp", method=RequestMethod.POST)
 	public ModelAndView signUpUser(@ModelAttribute UserVO userVO) {

@@ -13,10 +13,7 @@
 		<result column="RE_DEPT" property="re_Dept" />
 		<result column="RE_POSITION" property="re_Position" />
 		<result column="F_NUM" property="f_Num" />
-		<result column="FILE_NUM" property="file_Num" />
-		<result column="ORIGINFILENAME" property="originFileName" />
 		<result column="SAVEFILENAME" property="saveFileName" />
-		<result column="FILESIZE" property="fileSize" />
 	</resultMap>
  
  <!-- 왜 쓰는지 모르겠음...
@@ -53,16 +50,18 @@
 	
 	<!-- 리뷰리스트 , 리뷰파일리스트 조인 쿼리 -->
 	<select id="getReviewList" parameterType="Map" resultMap="reviewFileListMap">
-		select T1.RE_NUM, T1.ID, T1.RE_CONTENT, T1.RE_DATE, T1.RE_GRADE, T1.RE_DEPT, T1.RE_POSITION, T1.F_NUM,
-				T2.FILE_NUM, T2.ORIGINFILENAME, T2.SAVEFILENAME, T2.FILESIZE
-		from REVIEW T1 LEFT OUTER JOIN REVIEW_FILELIST T2
-		ON T1.RE_NUM = T2.RE_NUM
+		select *
+		from (select rownum rm, reviewList.* 
+			  from (select T1.RE_NUM, T1.ID, REPLACE(T1.RE_CONTENT, CHR(10), '&lt;br /&gt;') AS RE_CONTENT, T1.RE_DATE, T1.RE_GRADE, T1.RE_DEPT, T1.RE_POSITION, T1.F_NUM,
+							T2.SAVEFILENAME
+				from REVIEW T1 LEFT OUTER JOIN REVIEW_FILELIST T2
+				ON T1.RE_NUM = T2.RE_NUM
+				ORDER BY RE_NUM DESC ) reviewList)
 		<if test="pageSize > 0">
-			where rownum between #{startRow} and #{pageSize}
+			where rm between #{startRow} and #{pageSize}
 		</if>
-		ORDER BY RE_NUM DESC
+		
 	</select>
-	
 	
 	<insert id="insertReview" parameterType="reviewVO">
 		insert into REVIEW values(review_seq.NEXTVAL, #{id}, #{re_Content}, sysdate, #{re_Grade}, #{re_Dept}, #{re_Position}, #{f_Num})

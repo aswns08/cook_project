@@ -48,7 +48,14 @@ public class ReviewService {
 	}
 	
 	// 리뷰 글쓰기 메서드
+	@Transactional()
 	public void insertReview(ReviewVO reviewVO, MultipartHttpServletRequest multipartReq) {
+		
+//		System.out.println("컨텐츠 내용 : " +reviewVO.getRe_Content());
+//		String contents = reviewVO.getRe_Content();
+//		contents.replace("\n", "<br>");
+//		System.out.println("다시 컨텐츠 내용 : " +contents);
+//		reviewVO.setRe_Content(contents);
 		
 		reviewDao.insertReview(reviewVO);
 		
@@ -94,7 +101,6 @@ public class ReviewService {
 				
 			} // while
 		} // if
-		
 		
 	} // insertReview()
 	

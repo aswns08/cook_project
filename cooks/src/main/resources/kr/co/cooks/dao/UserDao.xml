@@ -4,6 +4,12 @@
 
 <mapper namespace="kr.co.cooks.dao.UserDao">
 
+	<select id="signUpEmailCheck" parameterType="String" resultType="String">
+		select ID
+		from USERS
+		where ID = #{signUp_email}
+	</select>
+
 	<select id="existUser" parameterType="Map" resultType="UserVO">
 		select ID, PASSWORD, NAME, ADDRESS, PHONE, USER_LEVEL, MILEAGE
 		from USERS
