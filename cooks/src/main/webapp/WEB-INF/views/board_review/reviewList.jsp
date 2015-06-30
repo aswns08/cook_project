@@ -87,8 +87,20 @@ textarea {
         <div class="row">
         
         <div class="row row-offcanvas row-offcanvas-left">
+        
+			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar"
+					role="navigation">
 
-				<div class="col-sm-9 col-md-10 main" style="width: 100%;">
+					<ul class="nav nav-sidebar" style="margin-top: 15px;">
+						<li class="active"><a href="freeList.app">자유게시판</a></li>
+						<li><a href="recipeList.app">나만 아는 레시피</a></li>
+						<li><a href="#">공지사항</a></li>
+						<li><a href="#">음식후기</a></li>
+					</ul>
+			</div>
+			
+			
+				<div class="col-sm-9 col-md-10 main">
 
 					<!--toggle sidebar button-->
 					<p class="visible-xs">

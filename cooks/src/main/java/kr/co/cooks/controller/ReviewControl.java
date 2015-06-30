@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import kr.co.cooks.service.ReviewService;
+import kr.co.cooks.vo.ReviewFileListVO;
 import kr.co.cooks.vo.ReviewVO;
 import kr.co.cooks.vo.UserVO;
 
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +43,8 @@ public class ReviewControl {
 	public ModelAndView reviewList(@RequestParam(defaultValue = "1") int pageNum,
 									@RequestParam(defaultValue = "15") int pageSize,
 									HttpSession session) {
+		
+		System.out.println("요청 들어옴");
 		
 		if(pageSize <= 0)
 			pageSize = PAGE_DEFAULT_SIZE;
@@ -87,6 +89,22 @@ public class ReviewControl {
 		mav.setViewName("board_review/reviewList");
 
 		return mav;
+	}
+	
+	@RequestMapping(value ="/contentReview.app")
+	public ModelAndView contentReview(@RequestParam int re_Num, int pageNum, HttpSession session) {
+		
+		userVO = (UserVO)session.getAttribute("loginUser");
+
+		ReviewFileListVO reviewFileListVO = reviewService.contentReview(re_Num);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("contentReview", reviewFileListVO);
+		mav.setViewName("board_review/reviewContent");
+		
+		return mav;
+		
 	}
 	
 	@RequestMapping(value = "/deleteReview.app", method = RequestMethod.GET)

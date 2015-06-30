@@ -119,8 +119,11 @@ function setPageNum(currentPageNum, endPageNum) {
 function loadReviewList(pageNum) {
 	if(pageNum <= 0) pageNum = currentPageNum;
 	
+	console.log('/cooks/reviewList.app?pageNum='+pageNum);
+	
 	$.getJSON('/cooks/reviewList.app?pageNum='+pageNum, function(data) {
 		
+		console.log(data);
 		setPageNum(data.currentPageNum, data.endPageNum);
 		
 		if(data.loginUser_Id != null) {
@@ -135,7 +138,9 @@ function loadReviewList(pageNum) {
 			
 			if(reviewList[i].saveFileName == null) { reviewList[i].saveFileName = 'NoImage.jpg' }
 			
-			//var re_content[i] = reviewList[i].re_Content.split('<br>')
+			//var reviewContent = [];
+			//reviewContent = reviewList[i].re_Content.split('<br />')
+			//console.log(reviewContent[0]);
 			
 			// 날짜 포맷.
 			var formatted_date = new Date(reviewList[i].re_Date);
@@ -156,9 +161,9 @@ function loadReviewList(pageNum) {
 						)
 			.append(
 					$('<td>').append(
-							$('<a>').attr('href', '#')
+							$('<a>').attr('href', '/cooks/contentReview.app?re_Num='+reviewList[i].re_Num+"&pageNum="+pageNum)
 									.attr('data-replyNo', reviewList[i].re_Num)
-									.html(reviewList[i].re_Content)
+									.html(reviewList[i].re_Content) //.attr('onClick', 'return false') a태그 url이 # 일 경우
 							)
 							.css('vertical-align', 'middle')
 						)
@@ -183,5 +188,10 @@ function deleteReview(re_Num) {
 		} else 
 			alert("삭제 실패");
 	});
+}
+
+function contentReview(re_Num) {
+	
+	
 }
 

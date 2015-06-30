@@ -71,6 +71,13 @@
 		insert into REVIEW_FILELIST values(reviewfile_seq.NEXTVAL, #{originFileName}, #{saveFileName}, #{fileSize}, review_seq.CURRVAL)
 	</insert>
 	
+	<select id="contentReview" parameterType="Integer" resultType="ReviewFileListVO">
+		select T1.*, T2.SAVEFILENAME
+		from REVIEW T1 LEFT OUTER JOIN REVIEW_FILELIST T2
+		ON T1.RE_NUM = T2.RE_NUM
+		WHERE T1.RE_NUM = #{re_Num}
+	</select>
+	
 	<delete id="deleteReview" parameterType="Integer">
 		delete
 		from REVIEW

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import kr.co.cooks.dao.ReviewDao;
+import kr.co.cooks.vo.ReviewFileListVO;
 import kr.co.cooks.vo.ReviewFileVO;
 import kr.co.cooks.vo.ReviewVO;
 
@@ -103,6 +104,12 @@ public class ReviewService {
 		} // if
 		
 	} // insertReview()
+	
+	public ReviewFileListVO contentReview(int re_Num) {
+		
+		return reviewDao.contentReview(re_Num);
+		
+	}
 	
 	@Transactional()
 	public void deleteReview(int re_Num) {
