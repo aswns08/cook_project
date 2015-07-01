@@ -19,6 +19,12 @@
 <link href="community/css/shop-homepage.css" rel="stylesheet">
 <link href='common/css/modalStyle.css' rel='stylesheet'>
 
+<style>
+#inlineFooter{
+	display: inline-block;
+}
+</style>
+
 <!-- jQuery -->
 <script src="js/jquery-1.11.1.js"></script>
 <!-- Bootstrap Core JavaScript -->
@@ -26,8 +32,8 @@
 
 <!-- Custom JS -->
 <script src="common/js/common.js"></script>
-<script src="common/js/signUp.js"></script>
-
+<script src="common/js/signUp.js"></script> 
+<script src="common/js/reviewContent.js"></script>
 </head>
 
 <body>
@@ -40,9 +46,10 @@
 				<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
 					<ul class="nav nav-sidebar" style="margin-top: 15px;">
-						<li class="active"><a href="freeList.app">자유게시판</a></li>
-						<li><a href="recipeList.app">나만 아는 레시피</a></li>
-						<li><a href="#">공지사항</a></li>
+						<li><a href="/cooks/NoticeList.app">공지사항</a></li>
+						<li><a href="/cooks/freeList.app">자유게시판</a></li>
+						<li><a href="/cooks/recipeList.app">나만 아는 레시피</a></li>
+						<li class="active"><a href="/cooks/reviewListView.app">음식후기</a></li>
 					</ul>
 
 				</div>
@@ -61,23 +68,31 @@
 
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>${contentReview.re_Num}</h4>
+							<h4>${contentReview.re_Title}</h4>
 							<label for="id">글쓴이 : </label> ${contentReview.id} <br>
 						</div>
-						<div class="panel-body">${contentReview.re_Content}</div>
+						<div class="panel-body">
+							${contentReview.re_Content}
+							<br />
+							<img src="fileUpload/${contentReview.saveFileName }">
+								
+						</div>
+						
 						<div class="panel-footer">
+						
+							<div id="inlineFooter"></div>
 
 							<!-- 게시글 수정/게시글 삭제 버튼을 좋아요/댓글달기 와 같은줄에 오게하기위해 id값 주고 style에서 inline-block 해줌 -->
 							<div id="inlineFooter" style="float: right">
-								<c:if test="${loginUser.id == contentReview.id}">
-								<a href="#">게시글 수정</a> .
-								<a href="#">게시글 삭제</a> .
-								 
-							</c:if>
-							<a href="reviewList.app?pageNum=${pageNum}">목록으로</a>
+								<c:if test="${loginUser.id == contentReview.id || loginUser.user_Level == 2}">
+								<a href="/cooks/updateReviewForm.app?re_Num=${contentReview.re_Num}&pageNum=${pageNum}">게시글 수정</a> .
+								<a href="/cooks/deleteReview.app?re_Num=${contentReview.re_Num}&pageNum=${pageNum}">게시글 삭제</a> .
+								</c:if>
+							<a href="reviewListView.app?pageNum=${pageNum}">목록으로</a>
 							</div>
-						</div>
-					</div>
+							
+						</div> <!-- panel-footer -->
+					</div>  <!-- panel panel-default -->
 					
 				</div>
 

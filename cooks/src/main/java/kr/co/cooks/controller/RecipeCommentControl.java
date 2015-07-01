@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.cooks.service.RecipeCommentService;
 import kr.co.cooks.vo.RecipeCommentVO;
+import kr.co.cooks.vo.UserVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,17 +18,21 @@ import org.springframework.web.servlet.ModelAndView;
 public class RecipeCommentControl {
 	@Autowired RecipeCommentService commentService;
 	
+	ModelAndView mav = new ModelAndView();
+	
 	//코멘트 쓰기
 	@RequestMapping(value="/recipeCommentWrite.app")
-	public ModelAndView recipeCommentWrite(@ModelAttribute RecipeCommentVO commentVO, HttpSession session, HttpServletResponse res) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView recipeCommentWrite(@ModelAttribute RecipeCommentVO commentVO, HttpSession session) {
 		
-		commentVO.setId((String)session.getAttribute("id"));
+		UserVO sessionVO = (UserVO)session.getAttribute("loginUser");		
+		commentVO.setId(sessionVO.getId());
 		
-		mav.addObject("commentVO", commentService.commentWrite(commentVO));
-		mav.setViewName("JSON");			
-
-		return mav ;		
+		commentService.commentWrite(commentVO);	
+		
+		mav.addObject("status", "success");
+		mav.setViewName("JSON");
+		
+		return mav;
 	}
 	
 	//코멘트 읽기
@@ -35,7 +40,7 @@ public class RecipeCommentControl {
 	public ModelAndView recipeCommentRead(int recipe_num, int endRow, HttpServletResponse res) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("commentVO", commentService.commentRead(recipe_num, endRow));
+		mav.addObject("recipeCommentUserVO", commentService.commentRead(recipe_num, endRow));
 		mav.setViewName("JSON");
 				
 		return mav;		
@@ -44,14 +49,12 @@ public class RecipeCommentControl {
 	//코멘트 삭제
 	@RequestMapping("/recipeCommentDelete.app")
 	public ModelAndView recipeCommentDelete(@RequestParam int recipe_num, int rcomment_num, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
 		
-		//System.out.println("rcomment_num ===> " + rcomment_num);
-				
-		mav.addObject("commentVO", commentService.commentDelete(recipe_num, rcomment_num));
+		commentService.commentDelete(recipe_num, rcomment_num);	
+		
+		mav.addObject("status", "success");
 		mav.setViewName("JSON");
 		
-		return mav ;			
+		return mav;
 	}
-
 }

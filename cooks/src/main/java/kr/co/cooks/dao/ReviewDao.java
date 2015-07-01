@@ -16,4 +16,7 @@ public interface ReviewDao {
 	public ReviewFileListVO contentReview(int re_Num);
 	public void deleteReview(int re_Num);
 	public void deleteReviewPhoto(int re_Num);
+	public ReviewVO getUpdateReviewForm(int re_Num);
+	public void updateReview(ReviewVO reviewVO);
+	public void updateFileUpload(ReviewFileVO reviewFileVO);
 }

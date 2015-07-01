@@ -6,11 +6,13 @@ public class ReviewFileListVO {
 	
 	private int re_Num;
 	private String id;
+	private String re_Title;
 	private String re_Content;
 	private Timestamp re_Date;
 	private int re_Grade;
 	private int re_Dept;
 	private int re_Position;
+	private int re_GroupId;
 	private int f_Num;
 	private String saveFileName;
 	
@@ -18,9 +20,10 @@ public class ReviewFileListVO {
 	@Override
 	public String toString() {
 		return "ReviewFileListVO [re_Num=" + re_Num + ", id=" + id
-				+ ", re_Content=" + re_Content + ", re_Date=" + re_Date
-				+ ", re_Grade=" + re_Grade + ", re_Dept=" + re_Dept
-				+ ", re_Position=" + re_Position + ", f_Num=" + f_Num
+				+ ", re_Title=" + re_Title + ", re_Content=" + re_Content
+				+ ", re_Date=" + re_Date + ", re_Grade=" + re_Grade
+				+ ", re_Dept=" + re_Dept + ", re_Position=" + re_Position
+				+ ", re_GroupId=" + re_GroupId + ", f_Num=" + f_Num
 				+ ", saveFileName=" + saveFileName + "]";
 	}
 
@@ -42,6 +45,16 @@ public class ReviewFileListVO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+	public String getRe_Title() {
+		return re_Title;
+	}
+
+
+	public void setRe_Title(String re_Title) {
+		this.re_Title = re_Title;
 	}
 
 
@@ -95,6 +108,16 @@ public class ReviewFileListVO {
 	}
 
 
+	public int getRe_GroupId() {
+		return re_GroupId;
+	}
+
+
+	public void setRe_GroupId(int re_GroupId) {
+		this.re_GroupId = re_GroupId;
+	}
+
+
 	public int getF_Num() {
 		return f_Num;
 	}
@@ -113,6 +136,7 @@ public class ReviewFileListVO {
 	public void setSaveFileName(String saveFileName) {
 		this.saveFileName = saveFileName;
 	}
+	
 	
 	
 

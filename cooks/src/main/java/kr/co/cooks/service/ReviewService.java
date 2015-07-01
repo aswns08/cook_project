@@ -52,11 +52,11 @@ public class ReviewService {
 	@Transactional()
 	public void insertReview(ReviewVO reviewVO, MultipartHttpServletRequest multipartReq) {
 		
-//		System.out.println("컨텐츠 내용 : " +reviewVO.getRe_Content());
-//		String contents = reviewVO.getRe_Content();
-//		contents.replace("\n", "<br>");
-//		System.out.println("다시 컨텐츠 내용 : " +contents);
-//		reviewVO.setRe_Content(contents);
+		System.out.println("컨텐츠 내용 : " +reviewVO.getRe_Content());
+		String contents = reviewVO.getRe_Content();
+		String str[] = contents.split("\n");  // 줄바꿈 문자열을 찾아서 문자열을 자름.
+		System.out.println("제목에 저장할 문자열 :" +str[0]);
+		reviewVO.setRe_Title(str[0]); // 자른 문자열의 0번째 : 즉 첫문장을 ReviewVO re_Title에 저장.
 		
 		reviewDao.insertReview(reviewVO);
 		
@@ -118,5 +118,69 @@ public class ReviewService {
 		reviewDao.deleteReview(re_Num);
 	}
 	
+	public ReviewVO getUpdateReviewForm(int re_Num) {
+		
+		return reviewDao.getUpdateReviewForm(re_Num);
+		
+	}
+	
+	@Transactional()
+	public void updateReview(ReviewVO reviewVO, MultipartHttpServletRequest multipartReq) {
+		
+		System.out.println("컨텐츠 내용 : " +reviewVO.getRe_Content());
+		
+		String contents = reviewVO.getRe_Content();
+		reviewVO.setRe_Content(contents); // 컨텐츠 내용 수정.
+		
+		String str[] = contents.split("\n");  // 줄바꿈 문자열을 찾아서 문자열을 자름.
+		System.out.println("제목에 저장할 문자열 :" +str[0]);
+		reviewVO.setRe_Title(str[0]); // 자른 문자열의 0번째 : 즉 첫문장을 ReviewVO re_Title에 저장.
+		
+		reviewDao.updateReview(reviewVO);
+		
+//		String realPath = "/Users/SongMJ/Documents/cooksUpload/"; // 파일이 로컬 하드에 저장되는 경로
+		
+		String fileUploadRealPath = servletContext.getRealPath("/fileUpload");
+		
+		File dir = new File(fileUploadRealPath);
+		
+		if(!dir.isDirectory()) {
+			dir.mkdir();
+		}
+		
+		if(multipartReq.getFiles("re_Fname") != null ) {
+
+			List<MultipartFile> multiFile = multipartReq.getFiles("re_Fname");
+			Iterator<MultipartFile> iterator = multiFile.iterator();
+			
+			while(iterator.hasNext()) {
+				MultipartFile uploadFile = iterator.next();
+				String originFileName = uploadFile.getOriginalFilename();
+				String saveFileName = originFileName;
+				long fileSize = uploadFile.getSize();
+				
+				if(!originFileName.isEmpty()) {
+					if(new File(fileUploadRealPath + "/" + originFileName).exists()) {
+						saveFileName = originFileName + "_" +System.currentTimeMillis();
+					}
+					
+					ReviewFileVO reviewFileVO = new ReviewFileVO();
+					reviewFileVO.setOriginFileName(originFileName);
+					reviewFileVO.setSaveFileName(saveFileName);
+					reviewFileVO.setFileSize(fileSize);
+					
+					reviewDao.updateFileUpload(reviewFileVO);
+					
+					try{
+						uploadFile.transferTo(new File(fileUploadRealPath + "/" + saveFileName));
+					} catch(Exception e) {
+						e.printStackTrace();
+					} // catch
+				} // if
+				
+			} // while
+		} // if
+		
+	} // updateReview()
 
 }

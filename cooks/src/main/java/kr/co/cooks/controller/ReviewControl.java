@@ -28,23 +28,22 @@ public class ReviewControl {
 	@Autowired ReviewService reviewService;
 	UserVO userVO;
 	
-	static final int PAGE_DEFAULT_SIZE = 15;
+	static final int PAGE_DEFAULT_SIZE = 5;
 	
 	@RequestMapping(value = "/reviewListView.app")
-	public ModelAndView reviewListView() {
+	public ModelAndView reviewListView(@RequestParam(defaultValue = "1") int pageNum) {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("pageNum", pageNum);
 		mav.setViewName("board_review/reviewList");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/reviewList.app")
 	public ModelAndView reviewList(@RequestParam(defaultValue = "1") int pageNum,
-									@RequestParam(defaultValue = "15") int pageSize,
+									@RequestParam(defaultValue = "5") int pageSize,
 									HttpSession session) {
-		
-		System.out.println("요청 들어옴");
 		
 		if(pageSize <= 0)
 			pageSize = PAGE_DEFAULT_SIZE;
@@ -86,7 +85,7 @@ public class ReviewControl {
 		
 		ModelAndView mav = new ModelAndView();
 		//mav.addObject("status", "success");
-		mav.setViewName("board_review/reviewList");
+		mav.setViewName("redirect:/reviewListView.app");
 
 		return mav;
 	}
@@ -97,6 +96,7 @@ public class ReviewControl {
 		userVO = (UserVO)session.getAttribute("loginUser");
 
 		ReviewFileListVO reviewFileListVO = reviewService.contentReview(re_Num);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("pageNum", pageNum);
@@ -108,7 +108,7 @@ public class ReviewControl {
 	}
 	
 	@RequestMapping(value = "/deleteReview.app", method = RequestMethod.GET)
-	public ModelAndView deleteReview(@RequestParam int re_Num, HttpSession session)  {
+	public ModelAndView deleteReview(@RequestParam int re_Num, int pageNum, HttpSession session)  {
 		
 		//userVO = (UserVO)session.getAttribute("loginUser");
 		
@@ -117,12 +117,38 @@ public class ReviewControl {
 		ModelAndView mav = new ModelAndView();
 		reviewService.deleteReview(re_Num);
 		
-		mav.addObject("status", "success");
-		mav.setViewName("JSON");
+		mav.setViewName("redirect:/reviewListView.app?pageNum="+pageNum);
 		return mav;
 		
 	}
 	
+	@RequestMapping(value = "updateReviewForm.app")
+	public ModelAndView getUpdateReview(@RequestParam int re_Num, int pageNum) {
+		ModelAndView mav = new ModelAndView();
+		
+		ReviewVO review = reviewService.getUpdateReviewForm(re_Num);
+		
+		mav.addObject("review", review);
+		mav.addObject("pageNum", pageNum);
+		mav.setViewName("board_review/reviewUpdateForm");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/updateReview.app", method = RequestMethod.POST)
+	public ModelAndView updateReview(@ModelAttribute ReviewVO reviewVO, int pageNum,
+									MultipartHttpServletRequest multipartReq) {
+
+		int re_Num = reviewVO.getRe_Num();
+		
+		//System.out.println("멀티파트" +multipartReq.getFile("re_Fname").getOriginalFilename());
+
+		reviewService.updateReview(reviewVO, multipartReq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/contentReview.app?re_Num="+re_Num+"&pageNum="+pageNum);
+
+		return mav;
+	}
 	
 	
 

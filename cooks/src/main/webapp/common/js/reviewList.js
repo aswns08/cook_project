@@ -1,14 +1,14 @@
-var currentPageNum;
 var endPageNum;
 var loginUser_Id;
 
 // $(document).ready(function() {}) ;
 $(function () {
+	
 	// 로그인하지 않았을 경우에는 글쓰기 버튼을 보여주지 않음.
 	if(loginUser_Id == null) $('#addBtn').css('display', 'none');
 	else $('#addBtn').css('display', '');
 		
-	loadReviewList(1);
+	loadReviewList(currentPageNum);
 	
 	//리스트를 불러올 때 세션을 넘겨 받아서 세션이 NULL 값이면 글쓰기 사용X
 	$('#re_Content').click(function() {
@@ -91,35 +91,58 @@ $(function () {
 	}); // click(function)
 	
 */	
+
+	// 페이지 이전, 다음 버튼 눌렀을 때 
+	$('#prevBtn').click(function(event){
+		if (currentPageNum > 1) {
+			
+			loadReviewList(--currentPageNum);
+		}
+	});
+
+	$('#nextBtn').click(function(event){
+		if (currentPageNum < endPageNum) {
+			loadReviewList(++currentPageNum);
+		}
+	});
+	
 	
 }); //document.ready
 
-
-// 페이징처리.
+/*
+//페이징처리
 function setPageNum(currentPageNum, endPageNum) {
-	window.currentPageNum = currentPageNum;
-	window.endPageNum = endPageNum;
+  window.currentPageNum = currentPageNum;
+  window.endPageNum = endPageNum;
+  
+  $('#pageNo').html(currentPageNum);
+  
+  if (currentPageNum <= 1) $('#prevBtn').css('display', 'none');
+  else $('#prevBtn').css('display', '');
+  
+  if (currentPageNum >= endPageNum) $('#nextBtn').css('display', 'none');
+  else $('#nextBtn').css('display', '');
+}
+*/
+
+
+function setPageNum(currentPageNum, endPageNum) {
 	
-	$('#pageNum').html(currentPageNum);
-	
-	if(currentPageNum <= 1)
-		$('#prevBtn').css('display', 'none');
-	else
-		$('#prevBtn').css('display', '');
-	
-	if(currentPageNum >= endPageNum)
-		$('#nextBtn').css('display', 'none');
-	else
-		$('#nextBtn').css('display', '');
-	
-} // setPageNum
+	$('.page-no').remove();
+	for(var index=1 ; index <= endPageNum ; index++) {
+		
+		$('<a>').addClass('page-no')
+				.attr('href', '#')
+				.attr('onClick', 'loadReviewList(' + index + ')')
+				.html('&nbsp;&nbsp;'+index+'&nbsp;&nbsp;')
+				.appendTo('#pagingBar')
+	}
+}
 
 
 // 리뷰리스트
 function loadReviewList(pageNum) {
 	if(pageNum <= 0) pageNum = currentPageNum;
-	
-	console.log('/cooks/reviewList.app?pageNum='+pageNum);
 	
 	$.getJSON('/cooks/reviewList.app?pageNum='+pageNum, function(data) {
 		
@@ -137,10 +160,11 @@ function loadReviewList(pageNum) {
 		for(var i=0 ; i < reviewList.length ; i++) {
 			
 			if(reviewList[i].saveFileName == null) { reviewList[i].saveFileName = 'NoImage.jpg' }
+			console.log("사진 : ", reviewList[i].saveFileName);
 			
-			//var reviewContent = [];
-			//reviewContent = reviewList[i].re_Content.split('<br />')
-			//console.log(reviewContent[0]);
+			
+			var reviewContent = [];
+			reviewContent = reviewList[i].re_Content.split('<br />')
 			
 			// 날짜 포맷.
 			var formatted_date = new Date(reviewList[i].re_Date);
@@ -162,8 +186,8 @@ function loadReviewList(pageNum) {
 			.append(
 					$('<td>').append(
 							$('<a>').attr('href', '/cooks/contentReview.app?re_Num='+reviewList[i].re_Num+"&pageNum="+pageNum)
-									.attr('data-replyNo', reviewList[i].re_Num)
-									.html(reviewList[i].re_Content) //.attr('onClick', 'return false') a태그 url이 # 일 경우
+									.attr('data-replyNo', reviewList[i].re_Num) //.attr('onClick', 'return false') a태그 url이 # 일 경우
+									.html(reviewContent[0]) 
 							)
 							.css('vertical-align', 'middle')
 						)
@@ -178,20 +202,7 @@ function loadReviewList(pageNum) {
 
 
 
-// 리뷰 삭제 함수.
-function deleteReview(re_Num) {
-	console.log("re_Num : ", re_Num);
-	$.getJSON('/cooks/deleteReview.app?re_Num='+re_Num, function(data) {
-		if(data.status == "success") {
-			loadReplyList(0);
-			
-		} else 
-			alert("삭제 실패");
-	});
-}
 
-function contentReview(re_Num) {
-	
-	
-}
+
+
 

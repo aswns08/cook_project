@@ -65,7 +65,7 @@ textarea {
 
 
 </style>
-
+	
 	<!-- jQuery -->
     <script src="js/jquery-1.11.1.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -75,7 +75,7 @@ textarea {
     <script src="common/js/signUp.js"></script>
     <script src="user/user.js"></script>
     <script src="common/js/reviewList.js"></script>
-
+	<script>var currentPageNum = ${pageNum};</script>
 </head>
 <body>
 
@@ -92,26 +92,17 @@ textarea {
 					role="navigation">
 
 					<ul class="nav nav-sidebar" style="margin-top: 15px;">
-						<li class="active"><a href="freeList.app">자유게시판</a></li>
-						<li><a href="recipeList.app">나만 아는 레시피</a></li>
-						<li><a href="#">공지사항</a></li>
-						<li><a href="#">음식후기</a></li>
+						<li><a href="/cooks/NoticeList.app">공지사항</a></li>
+						<li><a href="/cooks/freeList.app">자유게시판</a></li>
+						<li><a href="/cooks/recipeList.app">나만 아는 레시피</a></li>
+						<li class="active"><a href="/cooks/reviewListView.app">음식후기</a></li>
 					</ul>
 			</div>
 			
 			
 				<div class="col-sm-9 col-md-10 main">
 
-					<!--toggle sidebar button-->
-					<p class="visible-xs">
-						<button type="button" class="btn btn-primary btn-xs"
-							data-toggle="offcanvas">
-							<i class="glyphicon glyphicon-chevron-left"></i>
-						</button>
-					</p>
-
 					<h2 class="sub-header">Cook's Review</h2>
-					
 					
 		<div id="tweetFromDiv">			
 			<form id="tweetFrom" action="/cooks/writeReview.app" method="post" enctype="multipart/form-data">
@@ -142,7 +133,6 @@ textarea {
 			</form>
 		</div>
 		
-					
 					<div class="table-responsive">
 						<table class="table table-striped" id='reviewListTable'>
 							<thead>
@@ -159,8 +149,25 @@ textarea {
 								<!-- review.js 에서 반복문으로 <tr>, <td>를 append 함. -->
 							</tbody>
 						</table>
+						</div>
 						
-					</div>
+						<div id='pagingBar'></div>
+						<!-- 
+						<div id='pagingBar'>
+						  <% for(int index=1; index <= 5; index++) { %>
+						  <a href="#" onClick="loadReviewList(<%= index %>)"><%= index %></a>
+						  <% } %>
+						</div>
+						 -->
+						<!-- 
+						<div id='pagingBar'>
+						  <button id='prevBtn' type='button' class='btn btn-default'>이전</button>
+						  <span id='pageNo'>1</span>
+						  <button id='nextBtn' type='button' class='btn btn-default'>다음</button>
+						</div>
+						 -->
+						
+					
 
 				</div>
 				<!--/row-->

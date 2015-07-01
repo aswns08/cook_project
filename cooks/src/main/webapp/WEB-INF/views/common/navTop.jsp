@@ -44,21 +44,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">1인메뉴</a>
-                    </li>
-                    <li>
-                        <a href="#">맛집</a>
-                    </li>
-                    <li>
-                        <a href="recipeList.app">커뮤니티</a>
-                    </li>
-                    <li>
-                        <a href="#">공지사항</a>
-                    </li>
-                    <li>
-                        <a href="reviewListView.app">음식후기</a>
-                    </li>
+                    <li><a href="#">1인메뉴</a></li>
+                    <li><a href="/cooks/RestaurantList.app">맛집</a></li>
+                    <li><a href="/cooks/freeList.app">커뮤니티</a></li>
+                    <li><a href="/cooks/NoticeList.app">공지사항</a></li>
+                    <li><a href="/cooks/reviewListView.app">음식후기</a></li>
+					<c:if test="${loginUser.user_Level == 2}">
+						<li><a href="/cooks/AddRestaurantForm.app">맛집등록</a></li>
+					</c:if>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -102,6 +95,7 @@ $('#logoutBtn').click(function(event) {
 $('#userPage').click(function(event) {
 	location.href = '/cooks/userInfo.app';
 });
+
 
 
 </script>
