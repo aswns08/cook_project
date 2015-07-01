@@ -55,6 +55,7 @@ public class UserControl {
 		return mav;
 	}
 	
+	
 	@RequestMapping(value = "userInfo.app")
 	public String userInfo(HttpSession session) {
 		
@@ -64,19 +65,35 @@ public class UserControl {
 	}
 	
 	@RequestMapping(value = "userUpdate.app")
-	public ModelAndView userUpdate(@ModelAttribute UserVO userVO, HttpSession session) {
+	public ModelAndView userUpdate(@ModelAttribute UserVO userVO,
+									@RequestParam String pwd, HttpSession session) {
 		
 		System.out.println("JSON으로 넘어온 user정보 : " +userVO);
-
-		userService.userUpdate(userVO);
+		System.out.println("pwd 값 : " +pwd);
+		
+		String status = userService.userUpdate(userVO, pwd);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		session.setAttribute("loginUser", userVO);
-		mav.addObject("status", "success");
+		if(status == "success") {
+			session.setAttribute("loginUser", userVO);
+			mav.addObject("status", "success");
+		} else {
+			mav.addObject("status", "fail");
+		}
+		
 		mav.setViewName("JSON");
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "userOrderList.app")
+	public String userOrderList(HttpSession session) {
+		
+		System.out.println("session 값 : " +session.getAttribute("loginUser"));
+		
+		return "user/mypage_OrderList";
+	}
+	
 	
 }

@@ -48,7 +48,8 @@
 						<li><a href="#">구매내역</a></li>
 						<li><a href="#">마일리지</a></li>
 						<li><a href="#">나의 Q & A</a></li>
-						<li><a href="#">회원정보수정</a></li>
+						<li><a href="/cooks/userInfo.app">회원정보수정</a></li>
+						<li><a href="#findPwd" data-toggle="modal">비밀번호변경</a></li>
 					</ul>
 
 				</div>
@@ -160,6 +161,7 @@
     </div>
     <!-- /.container -->
     
-	
+    <jsp:include page="../common/sign_modal.jsp"/>
+    
 </body>
 </html>

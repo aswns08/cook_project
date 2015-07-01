@@ -21,7 +21,6 @@ public class UserService {
 		
 	}
 	
-	
 	public UserVO validation_Check(String email, String password) {
 		
 		HashMap<String, String> params = new HashMap<>();
@@ -37,9 +36,23 @@ public class UserService {
 		
 		userDao.signUpUser(userVO);
 	}
+	
 
-	public void userUpdate(UserVO userVO) {
+	public String userUpdate(UserVO userVO, String pwd) {
 		
-		userDao.userUpdate(userVO);
+		HashMap<String, String> params = new HashMap<>();
+		params.put("email", userVO.getId());
+		params.put("password", pwd);
+		
+		if( userDao.existUser(params) != null ) {
+			
+			userDao.userUpdate(userVO);
+			return "success";
+			
+		} else 
+			return "fail";
+			
 	}
+	
+	
 }

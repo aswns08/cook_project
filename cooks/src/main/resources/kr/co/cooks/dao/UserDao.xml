@@ -22,9 +22,11 @@
 	
 	<update id="userUpdate" parameterType="UserVO">
 		update USERS
-		set PASSWORD=#{password}, NAME=#{name}, ADDRESS=#{address}, PHONE=#{phone}
+		set NAME=#{name}, ADDRESS=#{address}, PHONE=#{phone}
 		where ID=#{id}
 	</update>
+	
+	
 
 </mapper>
 

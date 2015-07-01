@@ -74,7 +74,7 @@ textarea {
     <script src="common/js/common.js"></script>
     <script src="common/js/signUp.js"></script>
     <script src="user/user.js"></script>
-    <script src="common/js/reviewList.js"></script>
+    <script src="board_review/js/reviewList.js"></script>
 	<script>var currentPageNum = ${pageNum};</script>
 </head>
 <body>

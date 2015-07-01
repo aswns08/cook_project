@@ -33,7 +33,6 @@
 <!-- Custom JS -->
 <script src="common/js/common.js"></script>
 <script src="common/js/signUp.js"></script> 
-<script src="common/js/reviewContent.js"></script>
 </head>
 
 <body>

@@ -19,15 +19,17 @@
           <form role="form" id="loginForm">
             <div class="form-group">
               <label for="email"><span class="glyphicon glyphicon-envelope"></span> 이메일</label>
-              <input type="text" class="form-control" id="login_email" name="email" value='' placeholder="Enter email">
+              <input type="text" class="form-control" id="login_email" name="email" placeholder="Enter email">
             </div>
             
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
-              <input type="password" class="form-control" id="login_password" name="password" value='' placeholder="Enter password">
+              <input type="password" class="form-control" id="login_password" name="password" placeholder="Enter password">
             </div>
             
-            <button type="button" id="btnLogin" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>로그인</button>
+            <button type="button" id="btnLogin" class="btn btn-success btn-block">
+            	<span class="glyphicon glyphicon-off"></span>로그인
+            </button>
           </form>
         </div> <!-- modal body -->
         
@@ -89,7 +91,10 @@
 		      	<input type="text" class="form-control" id="signUp_phone" placeholder="Enter phone number">
 		      	<div id="validCheck_phone">&nbsp;</div>
             </div>
-            <button type="button" id="btnSignUp" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>회원가입</button>
+            
+            <button type="button" id="btnSignUp" class="btn btn-success btn-block">
+            	<span class="glyphicon glyphicon-off"></span>회원가입
+            </button>
           </form>          
         </div> <!-- modal body -->
       </div> <!-- modal content -->      
@@ -113,7 +118,9 @@
               <label for="input_email"><span class="glyphicon glyphicon-envelope"></span> 계정 이메일을 입력하세요</label>
               <input type="text" class="form-control" id="input_email" placeholder="Enter email">
             </div>  
-             <button type="button" onclick="close_findPassword();" class="btn btn-success btn-block" data-toggle="modal" data-target="#changePwd"><span class="glyphicon glyphicon-grain"></span> 인증번호 받기</button>
+             <button type="button" onclick="close_findPassword();" class="btn btn-success btn-block" data-toggle="modal" data-target="#changePwd">
+             	<span class="glyphicon glyphicon-grain"></span> 인증번호 받기
+             </button>
           </form>
         </div> <!-- modal body -->
         
@@ -148,10 +155,12 @@
             
               <div class="form-group">
               <label for="check_pwd"><span class="glyphicon glyphicon-eye-open"></span> 새 비밀번호 확인</label>
-              <input type="password" class="form-control" id="check_pwd" placeholder="Enter password again">
+              <input type="password" class="form-control" id="re_newPwd" placeholder="Enter password again">
             </div>
                
-            <button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-grain"></span> 비밀번호 변경하기</button>
+            <button type="button" class="btn btn-success btn-block">
+            	<span class="glyphicon glyphicon-grain"></span> 비밀번호 변경하기
+            </button>
           </form>
         </div> <!-- modal body -->
         
