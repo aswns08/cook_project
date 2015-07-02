@@ -4,7 +4,9 @@ var regExp6 = /^[a-zA-Z가-힣]([-_\.]?[a-zA-Z가-힣])*$/i; // 이름
 $(document).ready(function () {
 	
 	$('#btnSignUp').click(function () {
-		if(!emptyCheck()) return;
+		if(!emptyCheck()) return; // 이메일이 비어있으면 가입 불가.
+		if(!checkEmail()) return; // 이메일 형식이 잘못되면 가입 불가.
+		if(!checkUname()) return; // 이름 형식이 비어있으면 가입 불가.
 		
 		signUp();
 	}); // click(function)
@@ -33,7 +35,7 @@ function checkEmailfromDB() {
 	        , function(data){
 	          if (data.status == 'success') {
 	        	  document.getElementById('validCheck_email').style.color = "blue";
-	        	  document.getElementById('validCheck_email').innerHTML = "사용 가능한 아이디 입니다.";
+	        	  document.getElementById('validCheck_email').innerHTML = "멋진 아이디 입니다.";
 	          } else {
 	        	  document.getElementById('validCheck_email').style.color = "red";
 	        	  document.getElementById('validCheck_email').innerHTML = "사용할 수 없는 아이디 입니다.";
@@ -117,12 +119,12 @@ function checkUname() {
 	var signUpUname = document.getElementById("signUp_uname").value;
 	if (signUpUname == null || signUpUname.length == 0) {
 		document.getElementById('validCheck_uname').style.color = "red";
-		document.getElementById('validCheck_uname').innerHTML = "닉네임을 입력해주세요.";
+		document.getElementById('validCheck_uname').innerHTML = "이름을 입력해주세요.";
 		return false;
 		
 	} else if( !regExp6.test($('#signUp_uname').val()) ){
 		document.getElementById('validCheck_uname').style.color = "red";
-		document.getElementById('validCheck_uname').innerHTML = "닉네임을 잘못 입력하였습니다.(숫자, 특수문자 입력불가!)";
+		document.getElementById('validCheck_uname').innerHTML = "이름을 잘못 입력하였습니다.(숫자, 특수문자 입력불가!)";
 		return false;
 		
 	}else{

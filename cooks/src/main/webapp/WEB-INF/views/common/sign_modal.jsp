@@ -88,7 +88,7 @@
             
             <div class="">
             	<label for="signUp_phone"><span class="glyphicon glyphicon-phone"></span> 연락처</label>
-		      	<input type="text" class="form-control" id="signUp_phone" placeholder="Enter phone number">
+		      	<input type="text" class="form-control" id="signUp_phone" placeholder="010-0000-0000">
 		      	<div id="validCheck_phone">&nbsp;</div>
             </div>
             

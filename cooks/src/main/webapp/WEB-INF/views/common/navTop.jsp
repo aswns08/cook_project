@@ -25,8 +25,8 @@
                 	</c:if>
                 
         			<c:if test="${loginUser != null}">
-                		<li id="userPage" style='display:none'><a><span class="glyphicon glyphicon-user"> ${loginUser.name }</span></a></li>
-  	              		<li id="logoutBtn" style='display:none'><a><span class="glyphicon glyphicon-log-out" > 로그아웃</span></a></li>
+                		<li id="userPage"><a href="#" class="glyphicon glyphicon-user"> ${loginUser.name }</a></li>
+  	              		<li id="logoutBtn"><a href="#" class="glyphicon glyphicon-log-out"> 로그아웃</a></li>
                 	</c:if>
 						<li><a href="#" class="glyphicon glyphicon-shopping-cart"> 장바구니</a></li>        			
       			</ul>

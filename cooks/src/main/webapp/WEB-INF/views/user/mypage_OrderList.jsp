@@ -44,9 +44,8 @@
 					role="navigation">
 
 					<ul class="nav nav-sidebar" style="margin-top: 15px;">
-						<li class="active"><a href="#">주문내역/취소</a></li>
+						<li class="active"><a href="/cooks/userOrderList.app">주문내역/취소</a></li>
 						<li><a href="#">구매내역</a></li>
-						<li><a href="#">마일리지</a></li>
 						<li><a href="#">나의 Q & A</a></li>
 						<li><a href="/cooks/userInfo.app">회원정보수정</a></li>
 						<li><a href="#findPwd" data-toggle="modal">비밀번호변경</a></li>
